@@ -16,3 +16,9 @@ const api = fetch("http://localhost:3000/videos") //faz a busca
         `;
         })
     )
+
+//tratamento de erros
+//analisa bloco anterior e pega caso aconteça erros
+.catch((error)=> {
+    containerVideos.innerHTML = `<p> Houve um erro ao carregar os vídeos: ${error}</p>`;
+})
