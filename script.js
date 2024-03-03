@@ -1,8 +1,14 @@
 const containerVideos = document.querySelector(".videos__container");
 
-const api = fetch("http://localhost:3000/videos") //faz a busca
-    .then(res => res.json()) //resposta da busca "então"
-    .then((videos) =>
+// async avisa o js que vai ser usado código assincrono na função
+//await - vai aguardar que a busca seja feita p/ que o código da 
+//função assíncrona continue sendo executado eliminando a necessidade do uso do then pra esperar o resultado do codigo anterior
+async function buscarEMostrarVideos(){
+const busca = await fetch("http://localhost:3000/videos") //faz a busca
+const videos = await busca.json();
+
+    //.then(res => res.json()) //resposta da busca "então"
+    //.then((videos) =>
         videos.forEach((video) => {
             containerVideos.innerHTML += `
         <li class="videos__item">
@@ -15,10 +21,12 @@ const api = fetch("http://localhost:3000/videos") //faz a busca
         </li>
         `;
         })
-    )
-
+//   )
 //tratamento de erros
 //analisa bloco anterior e pega caso aconteça erros
-.catch((error)=> {
-    containerVideos.innerHTML = `<p> Houve um erro ao carregar os vídeos: ${error}</p>`;
-})
+//    .catch((error)=> {
+//     containerVideos.innerHTML = `<p> Houve um erro ao carregar os vídeos: ${error}</p>`;
+//   })
+}
+
+buscarEMostrarVideos();
