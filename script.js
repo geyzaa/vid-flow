@@ -62,3 +62,21 @@ function filtrarPesquisa() {
     }
 
 }
+
+/*Refatorando esse bloco 
+function filtrarPesquisa() {
+  const videos = document.querySelectorAll('.videos__item');
+  const valorFiltro = barraDePesquisa.value.toLowerCase();
+
+  videos.forEach((video) => {
+    const titulo = video.querySelector('.titulo-video').textContent.toLowerCase();
+
+    video.style.display = valorFiltro ? titulo.includes(valorFiltro) ? 'block' : 'none' : 'block';
+  });
+}
+
+Substituição do Loop for...of por forEach: O loop for...of é substituído por forEach para percorrer 
+os elementos videos. Isso torna o código mais legível e conciso.
+
+Condição Ternária: A lógica condicional que define o estilo de exibição (display) dos vídeos 
+é simplificada usando uma condição ternária. Isso elimina a necessidade de blocos if...else.*/
