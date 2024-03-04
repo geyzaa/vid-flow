@@ -12,7 +12,7 @@ async function buscarEMostrarVideos() {
         //.then(res => res.json()) //resposta da busca "então"
         //.then((videos) =>
         videos.forEach((video) => {
-            if(video.categoria == ""){
+            if (video.categoria == "") {
                 throw new Error('Vídeo não tem categoria');
             }
             containerVideos.innerHTML += `
@@ -26,7 +26,7 @@ async function buscarEMostrarVideos() {
             </li>
             `;
         })
-    } catch(error) {
+    } catch (error) {
         containerVideos.innerHTML = `<p>Houve um erro ao carregar os vídeos: ${error}</p>`
     }
     //   )
@@ -46,12 +46,12 @@ barraDePesquisa.addEventListener("input", filtrarPesquisa);
 function filtrarPesquisa() {
     const videos = document.querySelectorAll(".videos__item");
 
-    if (barraDePesquisa.value != ""){
-        for(let video of videos){
+    if (barraDePesquisa.value != "") {
+        for (let video of videos) {
             let titulo = video.querySelector(".titulo-video").textContent.toLowerCase();
             let valorFiltro = barraDePesquisa.value.toLowerCase();
 
-            if(!titulo.includes(valorFiltro)){
+            if (!titulo.includes(valorFiltro)) {
                 video.style.display = "none";
             } else {
                 video.style.display = "block";
@@ -80,3 +80,15 @@ os elementos videos. Isso torna o código mais legível e conciso.
 
 Condição Ternária: A lógica condicional que define o estilo de exibição (display) dos vídeos 
 é simplificada usando uma condição ternária. Isso elimina a necessidade de blocos if...else.*/
+
+const botaoCategoria = document.querySelectorAll(".superior__item");
+
+botaoCategoria.forEach((botao) => {
+    let nomeCategoria = botao.getAttribute("name");
+    botao.addEventListener("click", ()=> filtrarPorCategoria(nomeCategoria));
+})
+
+function filtrarPorCategoria (filtro) {
+    const videos =document.querySelectorAll(".videos__item");
+    for(let video of videos)
+}
