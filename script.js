@@ -6,12 +6,15 @@ const containerVideos = document.querySelector(".videos__container");
 async function buscarEMostrarVideos() {
     //try/catch - tentar executar o codigo e se ele capturar algum erro, faz o segundo bloco
     try {
-        const busca = await fetch("http://localhost:3000/videos") //faz a busca
+        const busca = await fetch("http://localhost:3000/videos"); //faz a busca
         const videos = await busca.json();
 
         //.then(res => res.json()) //resposta da busca "então"
         //.then((videos) =>
         videos.forEach((video) => {
+            if(video.categoria == ""){
+                throw new Error('Vídeo não tem categoria');
+            }
             containerVideos.innerHTML += `
             <li class="videos__item">
                 <iframe src="${video.url}" title="${video.titulo}" frameborder="0" allowfullscreen></iframe>
@@ -23,7 +26,7 @@ async function buscarEMostrarVideos() {
             </li>
             `;
         })
-    } catch (error) {
+    } catch(error) {
         containerVideos.innerHTML = `<p>Houve um erro ao carregar os vídeos: ${error}</p>`
     }
     //   )
@@ -40,13 +43,22 @@ const barraDePesquisa = document.querySelector(".pesquisar__input");
 
 barraDePesquisa.addEventListener("input", filtrarPesquisa);
 
-function filtrarPesquisa () {
+function filtrarPesquisa() {
     const videos = document.querySelectorAll(".videos__item");
 
     if (barraDePesquisa.value != ""){
+        for(let video of videos){
+            let titulo = video.querySelector(".titulo-video").textContent.toLowerCase();
+            let valorFiltro = barraDePesquisa.value.toLowerCase();
 
-    }else {
-
+            if(!titulo.includes(valorFiltro)){
+                video.style.display = "none";
+            } else {
+                video.style.display = "block";
+            }
+        }
+    } else {
+        video.style.display = "block";
     }
 
 }
